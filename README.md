@@ -5,7 +5,6 @@ Webservice **Node.js + Express** que:
 2. **Consulta Graph API** para obtener los datos del lead
 3. Envía el registro a **Prospecto3** en Rollbase
 
-Patrón igual a [Service-Musas-wompi](https://github.com/soporteimpel/Service-Musas-WOMPI).
 
 ## Endpoints
 
