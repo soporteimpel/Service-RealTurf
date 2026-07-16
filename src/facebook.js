@@ -1,5 +1,5 @@
 /**
- * Facebook Lead Ads — Graph API y validación webhook.
+ * Facebook Lead Ads — Graph API y validación webhook..
  */
 
 const crypto = require('crypto');
