@@ -18,7 +18,7 @@ async function processLeadById(leadgenId) {
 }
 
 /**
- * Procesar lead ya obtenido desde Graph API (sync por formulario).
+ * Procesar lead ya obtenido desde Graph API (sync por formulario)..
  */
 async function processLeadData(fbLead) {
   const leadgenId = fbLead.id;
