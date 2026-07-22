@@ -37,16 +37,24 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 
 /**
- * GET — Verificación webhook Facebook
+ * GET — Verificación webhook Facebook (Meta envía hub.mode, hub.verify_token, hub.challenge)
  */
-app.get('/webhook/facebook', (req, res) => {
-  verifyWebhook(req, res);
-});
+function handleFacebookWebhookGet(req, res) {
+  if (req.query['hub.mode']) {
+    return verifyWebhook(req, res);
+  }
+
+  res.status(200).json({
+    status: 'ok',
+    service: 'facebook-rollbase-webhook',
+    webhook: '/webhook/facebook',
+  });
+}
 
 /**
  * POST — Webhook Facebook Lead Ads → consulta Graph API → Rollbase
  */
-app.post('/webhook/facebook', async (req, res) => {
+async function handleFacebookWebhookPost(req, res) {
   try {
     const rawBody = req.rawBody ? req.rawBody.toString('utf8') : JSON.stringify(req.body);
     const signature = req.headers['x-hub-signature-256'] || '';
@@ -91,11 +99,16 @@ app.post('/webhook/facebook', async (req, res) => {
       error: error.message,
     });
   }
-});
+}
+
+// Raíz y /webhook/facebook — Meta puede usar cualquiera de las dos URLs
+app.get('/', handleFacebookWebhookGet);
+app.post('/', handleFacebookWebhookPost);
+app.get('/webhook/facebook', handleFacebookWebhookGet);
+app.post('/webhook/facebook', handleFacebookWebhookPost);
 
 /**
  * POST/GET — Consultar leads en Facebook y enviar a Rollbase (sync manual o Cloud Scheduler)
- * Requiere SYNC_SECRET en header X-Sync-Secret o ?secret=
  */
 async function handleSyncLeads(req, res) {
   if (!isSyncAuthorized(req)) {
@@ -149,7 +162,7 @@ app.get('/health', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Facebook → Rollbase webhook en puerto ${PORT}`);
-  console.log(`Webhook:  http://localhost:${PORT}/webhook/facebook`);
+  console.log(`Webhook:  http://localhost:${PORT}/webhook/facebook (también /)`);
   console.log(`Sync:     http://localhost:${PORT}/sync/leads`);
   console.log(`Health:   http://localhost:${PORT}/health`);
 });
