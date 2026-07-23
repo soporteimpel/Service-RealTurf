@@ -59,14 +59,21 @@ async function handleFacebookWebhookPost(req, res) {
     const rawBody = req.rawBody ? req.rawBody.toString('utf8') : JSON.stringify(req.body);
     const signature = req.headers['x-hub-signature-256'] || '';
 
+    console.log('[Facebook] POST recibido', {
+      hasSignature: Boolean(signature),
+      object: req.body?.object,
+      entries: req.body?.entry?.length || 0,
+    });
+
     if (!validateSignature(rawBody, signature)) {
-      console.error('[Facebook] Firma inválida');
+      console.error('[Facebook] Firma inválida — revisa que FB_APP_SECRET en Cloud Run coincida con el App Secret de Meta');
       return res.status(403).json({ error: 'Invalid signature' });
     }
 
     const leadgenIds = extractLeadgenIds(req.body);
 
     if (leadgenIds.length === 0) {
+      console.log('[Facebook] POST sin leadgen_id — revisa suscripción Page + campo leadgen');
       return res.status(200).json({ success: true, processed: 0 });
     }
 
