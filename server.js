@@ -252,7 +252,7 @@ req.body?.limit ||
 25
 );
 
-```
+
 const idsParam =
   req.query.ids ||
   req.body?.ids ||
@@ -288,7 +288,7 @@ return res.status(200).json({
   success: true,
   ...result,
 });
-```
+
 
 } catch (error) {
 console.error(
@@ -296,7 +296,7 @@ console.error(
 error.message
 );
 
-```
+
 if (error.response) {
   console.error(
     '[Sync] HTTP Status:',
@@ -313,7 +313,7 @@ return res.status(500).json({
   success: false,
   error: error.message,
 });
-```
+
 
 }
 }
