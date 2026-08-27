@@ -53,7 +53,7 @@ password: ROLLBASE_LOGIN_PASSWORD,
 output: 'json',
 });
 
-```
+
 const response = await axios.post(
   loginUrl,
   params.toString(),
@@ -86,12 +86,12 @@ console.error(
 );
 
 throw new Error('No se pudo obtener sessionId de Rollbase');
-```
+
 
 } catch (error) {
 console.error('[Rollbase] ❌ ERROR EN LOGIN');
 
-```
+
 if (error.response) {
   console.error(
     '[Rollbase] HTTP Status:',
@@ -107,7 +107,7 @@ if (error.response) {
 }
 
 throw error;
-```
+
 
 }
 }
@@ -150,7 +150,7 @@ params,
 timeout: 30000,
 });
 
-```
+
 console.log('[Rollbase] ✓ Respuesta create2:', {
   status: response.data?.status,
   hasId: Boolean(
@@ -161,12 +161,12 @@ console.log('[Rollbase] ✓ Respuesta create2:', {
 });
 
 return response.data;
-```
+
 
 } catch (error) {
 console.error('[Rollbase] ❌ ERROR CREANDO REGISTRO');
 
-```
+
 if (error.response) {
   console.error(
     '[Rollbase] HTTP Status:',
@@ -182,7 +182,7 @@ if (error.response) {
 }
 
 throw error;
-```
+
 
 }
 }
