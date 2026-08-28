@@ -175,7 +175,7 @@ if (!entry.changes || !Array.isArray(entry.changes)) {
 return;
 }
 
-```
+
 entry.changes.forEach((change) => {
   if (
     change.field === 'leadgen' &&
@@ -185,7 +185,7 @@ entry.changes.forEach((change) => {
     ids.push(change.value.leadgen_id);
   }
 });
-```
+
 
 });
 
