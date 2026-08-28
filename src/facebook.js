@@ -125,7 +125,7 @@ fields: 'id,created_time,field_data,form_id,page_id',
 timeout: 30000,
 });
 
-```
+
 console.log('[Facebook Graph] ✓ Lead obtenido correctamente', {
   leadgenId: response.data?.id,
   formId: response.data?.form_id,
@@ -134,7 +134,7 @@ console.log('[Facebook Graph] ✓ Lead obtenido correctamente', {
 });
 
 return response.data;
-```
+
 
 } catch (error) {
 console.error('[Facebook Graph] ❌ ERROR AL CONSULTAR LEAD');
