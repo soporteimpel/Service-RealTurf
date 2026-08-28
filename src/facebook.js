@@ -139,7 +139,7 @@ return response.data;
 } catch (error) {
 console.error('[Facebook Graph] ❌ ERROR AL CONSULTAR LEAD');
 
-```
+
 console.error('[Facebook Graph] Detalle:', {
   leadgenId,
   status: error.response?.status,
@@ -153,7 +153,7 @@ console.error('[Facebook Graph] Detalle:', {
 });
 
 throw error;
-```
+
 
 }
 }
